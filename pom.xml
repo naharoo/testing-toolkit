@@ -9,7 +9,7 @@
   <version>0.1.0-SNAPSHOT</version>
 
   <name>Testing Toolkit</name>
-  <description>Testing Toolkit for Java Applications</description>
+  <description>Testing Toolkit for JVM-based Applications</description>
   <url>https://naharoo.com/oss/testing-toolkit</url>
 
   <scm>
