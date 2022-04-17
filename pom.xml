@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.naharoo.commons</groupId>
+  <artifactId>testing-toolkit</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+
+  <name>Testing Toolkit</name>
+  <description>Testing Toolkit for Java Applications</description>
+  <url>https://naharoo.com/oss/testing-toolkit</url>
+
+  <scm>
+    <connection>scm:git:ssh://git@github.com/naharoo/testing-toolkit.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/naharoo/testing-toolkit.git
+    </developerConnection>
+    <url>https://github.com/naharoo/testing-toolkit</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>naharoo</id>
+      <email>codenarek@gmail.com</email>
+    </developer>
+  </developers>
+
+  <properties>
+    <java.source.version>17</java.source.version>
+    <java.release.version>8</java.release.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <compiler.plugin.version>3.8.1</compiler.plugin.version>
+    <spotless.plugin.version>2.17.2</spotless.plugin.version>
+    <surefire.plugin.version>2.22.2</surefire.plugin.version>
+    <failsafe.plugin.version>2.22.2</failsafe.plugin.version>
+    <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+
+    <skip.spotless.scan>false</skip.spotless.scan>
+    <podam.version>7.2.9.RELEASE</podam.version>
+    <google.java.format.version>1.15.0</google.java.format.version>
+    <junit-jupiter.version>5.8.2</junit-jupiter.version>
+    <assertj.version>3.22.0</assertj.version>
+    <rerunner-jupiter.version>2.1.6</rerunner-jupiter.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>uk.co.jemos.podam</groupId>
+      <artifactId>podam</artifactId>
+      <version>${podam.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.github.artsok</groupId>
+      <artifactId>rerunner-jupiter</artifactId>
+      <version>${rerunner-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Compiler -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler.plugin.version}</version>
+          <configuration>
+            <source>${java.source.version}</source>
+            <target>${java.source.version}</target>
+            <release>${java.release.version}</release>
+          </configuration>
+        </plugin>
+
+        <!-- Surefire -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.plugin.version}</version>
+        </plugin>
+
+        <!-- Failsafe -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${failsafe.plugin.version}</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+
+        <!-- Jacoco -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Spotless -->
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${spotless.plugin.version}</version>
+          <configuration>
+            <java>
+              <googleJavaFormat>
+                <version>${google.java.format.version}</version>
+                <style>GOOGLE</style>
+                <reflowLongStrings>true</reflowLongStrings>
+              </googleJavaFormat>
+            </java>
+            <skip>${skip.spotless.scan}</skip>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <phase>test</phase>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
