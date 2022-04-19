@@ -1,6 +1,7 @@
 package com.naharoo.commons.testingtoolkit.random;
 
 import static com.naharoo.commons.testingtoolkit.random.RandomizationSupport.randomizer;
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.artsok.RepeatedIfExceptionsTest;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 class RandomizerTest {
 
@@ -216,28 +218,89 @@ class RandomizerTest {
   }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void string() {}
+  void string() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().string())).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void testString() {}
+  void string_withLength() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().string(128))).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void alphanumericString() {}
+  void alphanumericString() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().alphanumericString(128))).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void alphabeticString() {}
+  void alphabeticString() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().alphabeticString(128))).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void numericString() {}
+  void numericString() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().numericString(128))).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void stringWithOnlySymbols() {}
+  void stringWithOnlySymbols() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      assertThat(set.add(randomizer().stringWithOnlySymbols(128))).isTrue();
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void email() {}
+  void email() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<String> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      final String email = randomizer().email();
+      assertThat(set.add(email)).isTrue();
+      assertThat(email)
+          .matches(
+              Pattern.compile(
+                  "^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$", CASE_INSENSITIVE));
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
-  void enum_() {}
+  void enum_() {
+    final int tries = randomizer().int_(1, 20);
+    final Set<DayOfWeek> set = new HashSet<>();
+
+    for (int i = 0; i < tries; i++) {
+      set.add(randomizer().enum_(DayOfWeek.class));
+    }
+  }
 
   @RepeatedIfExceptionsTest(repeats = 10)
   void elementFrom_array() {
