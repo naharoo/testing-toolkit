@@ -4,7 +4,7 @@
 
   <groupId>com.naharoo.commons</groupId>
   <artifactId>testing-toolkit</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
 
   <name>Testing Toolkit</name>
   <description>Testing Toolkit for JVM-based Applications</description>
@@ -15,7 +15,7 @@
     <developerConnection>scm:git:ssh://git@github.com/naharoo/testing-toolkit.git
     </developerConnection>
     <url>https://github.com/naharoo/testing-toolkit</url>
-    <tag>HEAD</tag>
+    <tag>0.2.0</tag>
   </scm>
 
   <licenses>
